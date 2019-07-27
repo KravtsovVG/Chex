@@ -1,0 +1,48 @@
+unit U_desenho_pecas;
+
+interface
+
+uses
+  System.Classes,System.IOUTils,SysUtils,FMX.Forms;
+
+   type TImagemPeca = class
+     function DesignaImagem(NumeroPeca:Integer):String;
+   end;
+
+const PP = '\img\PP.png';
+const TP = '\img\TP.png';
+const CP = '\img\CP.png';
+const BP = '\img\BP.png';
+const RP = '\img\RP.png';
+const DP = '\img\DP.png';
+
+implementation
+
+
+{ TImagemPeca }
+
+function TImagemPeca.DesignaImagem(NumeroPeca: Integer):String;
+begin
+
+  case NumeroPeca of
+
+  //peças pretas
+  0,1,2,3,4,5,6,7: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (PP);
+
+  8,9: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (TP);
+
+  10,11: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (CP);
+
+  12,13: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (BP);
+
+  14: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (RP);
+
+  15: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (DP);
+
+
+  //peças brancas
+
+  end;
+end;
+
+end.

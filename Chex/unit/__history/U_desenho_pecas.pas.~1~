@@ -1,0 +1,36 @@
+unit U_desenho_pecas;
+
+interface
+
+uses
+  System.Classes,System.IOUTils,SysUtils,FMX.Forms;
+
+   type TImagemPeca = class
+     function DesignaImagem(NumeroPeca:Integer):String;
+   end;
+
+const BP1 = '\img\BP1.png';
+
+implementation
+
+
+{ TImagemPeca }
+
+function TImagemPeca.DesignaImagem(NumeroPeca: Integer):String;
+begin
+
+  case NumeroPeca of
+  0: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (BP1);
+
+  1: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (BP1);
+
+  2: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (BP1);
+
+  3: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (BP1);
+
+  4: result := TDirectory.GetParent(ExtractFileDir(ParamStr(0))) + (BP1);
+
+  end;
+end;
+
+end.

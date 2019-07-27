@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/06/14 12:31:34.000.335,=C:\Projetos\Unit1.pas</Transaction>
+    <Transaction>2019/06/14 12:32:43.000.875,C:\Projetos\Unit1.pas=C:\Projetos\ChexServer\unit\u_veirer.pas</Transaction>
+    <Transaction>2019/06/14 12:32:43.000.875,C:\Projetos\Unit1.fmx=C:\Projetos\ChexServer\unit\u_veirer.fmx</Transaction>
+    <Transaction>2019/06/14 12:32:59.000.445,C:\Projetos\Project1.dproj=C:\Projetos\ChexServer\pjr\ChexServer.dproj</Transaction>
+    <Transaction>2019/06/15 00:02:07.000.723,=C:\Projetos\ChexServer\pjr\Unit1.pas</Transaction>
+    <Transaction>2019/06/15 00:03:24.000.976,C:\Projetos\ChexServer\pjr\Unit1.pas=C:\Projetos\ChexServer\unit\u_menu_main.pas</Transaction>
+    <Transaction>2019/06/15 00:03:24.000.976,C:\Projetos\ChexServer\pjr\Unit1.fmx=C:\Projetos\ChexServer\unit\u_menu_main.fmx</Transaction>
+    <Transaction>2019/06/15 17:43:50.000.444,=C:\Projetos\ChexServer\unit\u_pecas.pas</Transaction>
+    <Transaction>2019/06/15 17:49:40.000.241,C:\Projetos\ChexServer\unit\u_veirer.fmx=C:\Projetos\ChexServer\unit\u_board.fmx</Transaction>
+    <Transaction>2019/06/15 17:49:40.000.241,C:\Projetos\ChexServer\unit\u_veirer.pas=C:\Projetos\ChexServer\unit\u_board.pas</Transaction>
+    <Transaction>2019/06/15 22:44:43.000.769,=C:\Projetos\ChexServer\pjr\Unit1.pas</Transaction>
+    <Transaction>2019/06/15 22:45:07.000.191,C:\Projetos\ChexServer\unit\U_desenho_pecas.pas=C:\Projetos\ChexServer\pjr\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

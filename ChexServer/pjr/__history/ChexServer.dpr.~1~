@@ -1,0 +1,14 @@
+program ChexServer;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  u_veirer in '..\unit\u_veirer.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

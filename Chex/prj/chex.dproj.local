@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/06/14 12:17:32.000.237,=C:\Projetos\Unit1.pas</Transaction>
+    <Transaction>2019/06/14 12:18:15.000.537,C:\Projetos\Unit1.pas=C:\Projetos\Chex\unit\u_board.pas</Transaction>
+    <Transaction>2019/06/14 12:18:15.000.537,C:\Projetos\Unit1.fmx=C:\Projetos\Chex\unit\u_board.fmx</Transaction>
+    <Transaction>2019/06/14 12:18:21.000.847,C:\Projetos\Project1.dproj=C:\Projetos\Chex\prj\chex.dproj</Transaction>
+    <Transaction>2019/06/15 15:17:39.000.793,=C:\Projetos\Chex\prj\Unit1.pas</Transaction>
+    <Transaction>2019/06/15 15:17:57.000.918,C:\Projetos\Chex\unit\u_pecas.pas=C:\Projetos\Chex\prj\Unit1.pas</Transaction>
+    <Transaction>2019/06/16 00:17:00.000.533,=C:\Projetos\Chex\unit\U_desenho_pecas.pas</Transaction>
+  </Transactions>
+</BorlandProject>

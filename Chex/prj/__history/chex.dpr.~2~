@@ -1,0 +1,14 @@
+program chex;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  u_board in '..\unit\u_board.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

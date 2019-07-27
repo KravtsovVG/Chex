@@ -1,0 +1,15 @@
+program ChexServer;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  u_veirer in '..\unit\u_veirer.pas' {Users},
+  u_menu_main in '..\unit\u_menu_main.pas' {frm_main};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(Tfrm_main, frm_main);
+  Application.Run;
+end.

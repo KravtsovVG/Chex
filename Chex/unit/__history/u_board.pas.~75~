@@ -1,0 +1,234 @@
+unit u_board;
+
+interface
+
+uses
+  System.SysUtils,
+  System.Types,
+  System.UITypes,
+  FMX.Forms,
+  FMX.Dialogs,
+  IdBaseComponent,
+  IdComponent,
+  IdTCPConnection,
+  IdTCPClient,
+  IdThreadComponent,
+  FMX.StdCtrls,
+  System.Math,
+  u_pecas,
+  System.Classes,
+  FMX.Types,
+  FMX.Controls,
+  FMX.Objects,
+  FMX.Layouts,
+  FMX.Controls.Presentation,
+  System.Math.Vectors,
+  FMX.Controls3D,
+  FMX.Layers3D;
+
+type
+  Tfrm_client = class(TForm)
+    Board: TImage;
+    lLeft: TLayout;
+    lRight: TLayout;
+    lytPrincipal: TLayout;
+    StyleBook1: TStyleBook;
+    Button1: TButton;
+    posX: TText;
+    posY: TText;
+    pieceTextName: TText;
+    procedure ConectarCliente;
+    procedure DesconectarCliente;
+    procedure MandarMsg;
+    procedure FormCreate(Sender: TObject);
+    procedure IdTCPClientConnected(Sender: TObject);
+    procedure IdThreadComponentRun(Sender: TIdThreadComponent);
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+
+  private
+    { Private declarations }
+    function  GetNow():String;
+    procedure Display(p_sender: String; p_message: string);
+    procedure MovePiece(Comand:String);
+
+  public
+    { Public declarations }
+    procedure AtualizaPosicao;
+  end;
+
+var
+  frm_client: Tfrm_client;
+  // ... TIdTCPClient
+  idTCPClient         : TIdTCPClient;
+  // ... TIdThreadComponent
+  idThreadComponent   : TIdThreadComponent;
+
+  //message
+  messageToSend:String;
+  msgFromServer : string;
+
+  //Indica se está segurando ou não a peça
+  Grab: boolean = false;
+  Offset: tpointf;
+  MovingRectangle: TRectangle;
+  Pecas:TPeca;
+
+
+// ... listening port : GUEST CLIENT
+const
+  GUEST_PORT = 20010;
+
+implementation
+
+{$R *.fmx}
+
+
+{ TForm1 }
+
+
+procedure Tfrm_client.AtualizaPosicao;
+begin
+  posY.Text := Pecas.PosY;
+  posX.Text := Pecas.PosX;
+  pieceTextName.Text := Pecas.NomePeca;
+  //IdTCPClient.IOHandler.WriteLn(Pecas.NomePeca+':'+Pecas.PosX+'|'+Pecas.PosY);
+end;
+
+procedure Tfrm_client.Button1Click(Sender: TObject);
+
+begin
+
+ // MandarMsg;
+
+  Pecas := TPeca.Create(lytPrincipal);
+
+
+
+end;
+
+procedure Tfrm_client.ConectarCliente;
+begin
+ // ... disable connect button
+ //   btn_connect.Enabled := False;
+
+    // ... try to connect to Server
+    try
+        IdTCPClient.Connect;
+    except
+        on E: Exception do begin
+            Display('CLIENT', 'CONNECTION ERROR! ' + E.Message);
+            //btn_connect.Enabled := True;
+        end;
+    end;
+end;
+
+procedure Tfrm_client.DesconectarCliente;
+begin
+ // ... is connected?
+    if IdTCPClient.Connected then begin
+        // ... disconnect from Server
+        IdTCPClient.Disconnect;
+
+    end;
+end;
+
+procedure Tfrm_client.Display(p_sender, p_message: string);
+var msg:String;
+begin
+  TThread.Queue(nil, procedure
+                     begin
+                         msg := ('[' + p_sender + '] - '
+                         + GetNow() + ': ' + p_message);
+                     end
+               );
+end;
+
+procedure Tfrm_client.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   DesconectarCliente;
+end;
+
+procedure Tfrm_client.FormCreate(Sender: TObject);
+begin
+// ... create TIdTCPClient
+    idTCPClient                 := TIdTCPClient.Create(Self);
+
+    // ... set properties
+    idTCPClient.Host            := 'localhost';
+    idTCPClient.Port            := GUEST_PORT;
+    // ... etc..
+
+    // ... callback functions
+    idTCPClient.OnConnected     := IdTCPClientConnected;
+    // ... etc..
+
+    // ... create TIdThreadComponent
+    idThreadComponent           := TIdThreadComponent.Create();
+
+    // ... callback functions
+    idThreadComponent.OnRun     := IdThreadComponentRun;
+    // ... etc..
+
+    ConectarCliente;
+end;
+
+function Tfrm_client.GetNow: String;
+begin
+ Result := FormatDateTime('yyyy-mm-dd hh:nn:ss', Now) + ': ';
+end;
+
+procedure Tfrm_client.IdTCPClientConnected(Sender: TObject);
+begin
+
+    // ... after connection is ok, run the Thread ... waiting messages from server
+    IdThreadComponent.Active  := True;
+
+
+
+end;
+
+procedure Tfrm_client.IdThreadComponentRun(Sender: TIdThreadComponent);
+
+begin
+    // ... read message from server
+    msgFromServer := IdTCPClient.IOHandler.ReadLn();
+
+    MovePiece(msgFromServer);
+    lytPrincipal.Repaint;
+
+end;
+
+procedure Tfrm_client.MandarMsg;
+begin
+ // ... send message to Server
+    IdTCPClient.IOHandler.WriteLn('');
+    ShowMessage(msgFromServer);
+end;
+
+procedure Tfrm_client.MovePiece(Comand:String);
+var List: TStrings;Pos:String;oRect: TObject;
+begin
+
+
+  List := TStringList.Create;
+  try
+    ExtractStrings([':'], [], PChar(Comand), List);
+    if List[0] <> '' then
+    begin
+      Pos:= List[1];
+      ExtractStrings(['|'], [], PChar(Pos), List);
+
+      oRect := FindComponent(List[0]);
+
+      TRectangle(oRect).Position.X := StrToInt(List[2]);
+      TRectangle(oRect).Position.Y := StrToInt(List[3]);
+    end;
+  finally
+    List.Free;
+  end;
+
+
+end;
+
+end.
