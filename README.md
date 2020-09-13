@@ -6,7 +6,3 @@ the create form's function of indy Component. Then compile Chex project in Delph
 Run ChexServer and click to create game. Then run Chex and click to conect and try to move some 
 piece around. Notice that while you move any piece in the client's side the same piece it's moved
 in the server's side. 
-
-
-
- 
