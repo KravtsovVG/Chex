@@ -1,5 +1,5 @@
 # Chex
-Only a chess game made in Delphi using sockets. I stopped the project due to personal issues.
+Only a chess game made in Delphi using sockets. I stopped the project due to personal matters.
 
 After compiling ChexServer project into Delphi, open Chex project and change the IP address in 
 the create form's function of indy Component. Then compile Chex project in Delphi. 
